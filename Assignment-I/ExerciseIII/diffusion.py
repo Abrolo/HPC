@@ -4,6 +4,7 @@ import numpy as np
 
 grid_shape = (640, 640)
 
+@profile
 def evolve(grid, dt, D=1.0):
     xmax, ymax = grid_shape
     new_grid = [[0.0] * ymax for x in range(xmax)]

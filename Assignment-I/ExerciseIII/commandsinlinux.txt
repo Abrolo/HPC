@@ -1,3 +1,9 @@
 To run the code and use cprofiler:
+
 1 : python3 -m cProfile -o diffusion.stats diffusion.py
 2 : python3 -m snakeviz diffusion.stats --server
+
+To run the code and use line_profiler :
+
+1 : kernprof -l diffusion.py
+2 : python3 -m line_profiler diffusion.py.lprof
