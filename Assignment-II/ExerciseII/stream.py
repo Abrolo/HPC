@@ -1,8 +1,8 @@
 import numpy as np
 from array import array
 from timeit import default_timer as timer
-#from matplotlib import rc
 import matplotlib.pyplot as plt
+
 ### STREAM Benchmark for list ###
 # copy
 def copy_list(a,c):
@@ -42,8 +42,7 @@ def initialize_numpy(a,b,c):
     b = 2.0
     c = 0.0
     
-STREAM_ARRAY_SIZE = 1_000
-#times = np.arange((iteration,4))
+STREAM_ARRAY_SIZE = int(input("Enter the initial vector size: "))
 scalar = 2.0
 type_arry = input("Enter the array type: ")
 iteration = int(input("Enter the number of iteration: "))
@@ -75,6 +74,12 @@ if(type_arry=="list"):
     second_data = "List : scale"
     third_data = "List : sum"
     fourth_data = "List : triad"
+    plot_name = "List.png"
+    if(iteration==1):
+        print(first_data,str(times[k][0])+" s",sep="         ")
+        print(second_data,str(times[k][1])+" s",sep="         ")
+        print(third_data,str(times[k][2])+" s",sep="         ")
+        print(fourth_data,str(times[k][3])+" s",sep="         ")
         
 elif(type_arry=="array"):
     for k in range(iteration):
@@ -101,7 +106,13 @@ elif(type_arry=="array"):
     second_data = "Array : scale"
     third_data = "Array : sum"
     fourth_data = "Array : triad"
-    
+    plot_name =	"Array.png"
+    if(iteration==1):
+        print(first_data,str(times[k][0])+" s",sep="         ")
+        print(second_data,str(times[k][1])+" s",sep="         ")
+        print(third_data,str(times[k][2])+" s",sep="         ")
+        print(fourth_data,str(times[k][3])+" s",sep="         ")
+        
 elif(type_arry=="numpy"):
     for k in range(iteration):
         array_size[k] = STREAM_ARRAY_SIZE
@@ -127,17 +138,22 @@ elif(type_arry=="numpy"):
     second_data = "Numpy : scale"
     third_data = "Numpy : sum"
     fourth_data = "Numpy : triad"
-
-plt.plot(array_size[:],times[:,0],'-.',color='black')
-plt.plot(array_size[:],times[:,1],'-.',color='red')
-plt.plot(array_size[:],times[:,2],'-.',color='blue')
-plt.plot(array_size[:],times[:,3],'-.',color='green')
-     
-plt.legend((first_data, second_data, third_data, fourth_data),
-           loc='best', prop={'size': 15})
-
-plt.xlabel(r"Vector length",fontsize=18) 
-plt.ylabel(r"Run time",fontsize=18)
-plt.xlim(xmin=0)
-plt.ylim(ymin=0)
-plt.show()
+    plot_name =	"Numpy.png"
+    if(iteration==1):
+        print(first_data,str(times[k][0])+" s",sep="         ")
+        print(second_data,str(times[k][1])+" s",sep="         ")
+        print(third_data,str(times[k][2])+" s",sep="         ")
+        print(fourth_data,str(times[k][3])+" s",sep="         ")
+        
+if(iteration!=1):
+    plt.plot(array_size[:],times[:,0],'-.',color='black')
+    plt.plot(array_size[:],times[:,1],'-.',color='red')
+    plt.plot(array_size[:],times[:,2],'-.',color='blue')
+    plt.plot(array_size[:],times[:,3],'-.',color='green')
+    plt.legend((first_data, second_data, third_data, fourth_data),
+               loc='best', prop={'size': 15})
+    plt.xlabel(r"Vector length",fontsize=18) 
+    plt.ylabel(r"Run time",fontsize=18)
+    plt.xlim(xmin=0)
+    plt.ylim(ymin=0)
+    plt.savefig(plot_name)
