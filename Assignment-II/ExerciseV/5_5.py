@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import random
-import pytest
+
 from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 
