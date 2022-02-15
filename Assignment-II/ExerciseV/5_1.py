@@ -39,9 +39,9 @@ def test_vector_matrix_mul():
     W_slow = fill_w(N)
     W_fast = fast_dft(N)
 
-    expected = vector_matrix_mul(x, W_slow, N)
-    actual= np.dot(W_fast, x)
-    
+    actual = vector_matrix_mul(x, W_slow, N)
+    expected= np.dot(W_fast, x)
+    #Converting to np array just to be sure
     actual = np.array(actual)
 
     for i in range(N):
