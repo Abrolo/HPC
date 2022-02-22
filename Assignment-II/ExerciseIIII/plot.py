@@ -24,7 +24,7 @@ if(flops=="y"):
         plt.plot(time_l[:,0],time_l[:,1],'-.',color='black')
         plt.plot(time_a[:,0],time_a[:,1],'-.',color='green')
         plt.plot(time_n[:,0],time_n[:,1],'-.',color='blue')
-        plt.legend(('list','Array','NUmpy'),
+        plt.legend(('list','Array','Numpy'),
                    loc='best', prop={'size': 15})
         plt.xlabel(r"$n$",fontsize=18)
         plt.ylabel(r"$FLPO/s$",fontsize=18)
