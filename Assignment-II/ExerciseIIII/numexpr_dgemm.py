@@ -28,12 +28,12 @@ if(optimization=="y"):
         b = np.zeros(shape=(n,n))
         c = np.zeros(shape=(n,n))
         initialize(a,b,c,n)
-	times[k][1] = timer()
+    times[k][1] = timer()
         #c = dgemm_numexpr(a,b,c,n) 
-        dgemm_numexpr(a,b,c,n)
-        times[k][1] = timer() - times[k][1]
-        times[k][0] = n
-        n +=2
+    dgemm_numexpr(a,b,c,n)
+    times[k][1] = timer() - times[k][1]
+    times[k][0] = n
+    n +=2
     array_type = "Numexpr"
 elif(optimization=="n"):
     for k in range(iteration):
@@ -55,5 +55,5 @@ plt.xlabel(r"$N$",fontsize=18)
 plt.ylabel(r"Run time",fontsize=18)
 plt.xlim(xmin=0)
 plt.ylim(ymin=0)
-#plt.savefig(array_type+".png")
-plt.show()
+plt.savefig(array_type+".png")
+#plt.show()
