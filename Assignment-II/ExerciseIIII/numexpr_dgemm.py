@@ -18,7 +18,7 @@ def dgemm_numexpr(a,b,c,n):
     ne.evaluate("a*b+c",out=c)
 
 n = int(input("Enter the array initial array size (please enter 2): "))
-iteration = int(input("Enter the number of iteration (for final result, please enter 45): "))
+iteration = int(input("Enter the number of iteration (for final result, please enter 250): "))
 optimization = input("Enter y or n for using numexpr: ")
 times = np.zeros(shape=(iteration,2))
 
@@ -29,12 +29,11 @@ if(optimization=="y"):
         c = np.zeros(shape=(n,n))
         initialize(a,b,c,n)
     times[k][1] = timer()
-        #c = dgemm_numexpr(a,b,c,n) 
     dgemm_numexpr(a,b,c,n)
     times[k][1] = timer() - times[k][1]
     times[k][0] = n
     n +=2
-    array_type = "Numexpr"
+    array_type = "Numexpr_opt"
 elif(optimization=="n"):
     for k in range(iteration):
         a = np.zeros(shape=(n,n))
@@ -46,14 +45,9 @@ elif(optimization=="n"):
         times[k][1] = timer() - times[k][1]
         times[k][0] = n
         n +=2
-    array_type = "Numpy"
+    array_type = "Numpy_opt"
 
-plt.figure(figsize=(8.5, 6))
-plt.plot(times[:,0],times[:,1],'-.',color='blue')
-plt.legend((array_type),loc='best', prop={'size': 15})
-plt.xlabel(r"$N$",fontsize=18)
-plt.ylabel(r"Run time",fontsize=18)
-plt.xlim(xmin=0)
-plt.ylim(ymin=0)
-plt.savefig(array_type+".png")
-#plt.show()
+f = open(array_type+".txt", "w")
+for i in times:
+    f.write(f"{i[0]}\t{i[1]}\n")
+f.close()
