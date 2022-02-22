@@ -90,8 +90,7 @@ if(output=="p" and array_type=="numpy"):
     plt.ylabel(r"Run time",fontsize=18)
     plt.xlim(xmin=0)
     plt.ylim(ymin=0)
-    #plt.savefig(array_type+"_cache"+".png")
-    plt.show()
+    plt.savefig(array_type+"_cache"+".png")
 elif(output=="w"):
     if(flop=="y"):
         array_type+="_flop"

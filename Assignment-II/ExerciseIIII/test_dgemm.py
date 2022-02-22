@@ -19,12 +19,13 @@ def dgemm_list(a,b,c,n):
                 c[i][j] = a[i][k]*b[k][j] + c[i][j]
     return c
 # set the same array size used in blas_example.c run
-n = 6 
+n = 80
 
 datadir    = ''
 dataname = 'reference.txt'
 reference    = np.loadtxt(dataname)
-# list type
+print(reference)
+#list type
 a_l = [[0 for x in range(n)] for x in range(n)]
 b_l= [[0 for x in range(n)] for x in range(n)]
 c_l = [[0 for x in range(n)] for x in range(n)]
@@ -32,11 +33,11 @@ c_l = [[0 for x in range(n)] for x in range(n)]
 c_l = dgemm_list(a_l,b_l,c_l,n)
 
 # array type
-a_a = [array('f', (0 for x in range(n))) for x in range(n)]
-b_a = [array('f', (0 for x in range(n))) for x in range(n)]
-c_a = [array('f', (0 for x in range(n))) for x in range(n)]
+a_a = [array('d', (0 for x in range(n))) for x in range(n)]
+b_a = [array('d', (0 for x in range(n))) for x in range(n)]
+c_a = [array('d', (0 for x in range(n))) for x in range(n)]
 (a_a,b_a,c_a) = initialize(a_a,b_a,c_a,n)
-c_a = np.round(dgemm_list(a_a,b_a,c_a,n),2)
+c_a = dgemm_list(a_a,b_a,c_a,n)
 
 #numpy type
 a_n = np.zeros(shape=(n,n))
@@ -47,8 +48,15 @@ c_n = dgemm_numpy(a_n,b_n,c_n,n)
 
 @pytest.mark.parametrize(
     "test_input,reference",
-    [(c_a, reference),(c_a, reference),(c_n, reference)],
+    [(c_a, reference),(c_l, reference),(c_n, reference)],
 )
 
 def test_result(test_input,reference):
     np.testing.assert_allclose(test_input,reference)
+#@pytest.mark.parametrize(
+#    "test_input,reference",
+#    [(c_l, reference)],
+#)
+
+#def test_result(test_input,reference):
+#    np.testing.assert_allclose(test_input,reference)
