@@ -28,11 +28,11 @@ if(optimization=="y"):
         b = np.zeros(shape=(n,n))
         c = np.zeros(shape=(n,n))
         initialize(a,b,c,n)
-    times[k][1] = timer()
-    dgemm_numexpr(a,b,c,n)
-    times[k][1] = timer() - times[k][1]
-    times[k][0] = n
-    n +=2
+        times[k][1] = timer()
+        dgemm_numexpr(a,b,c,n)
+        times[k][1] = timer() - times[k][1]
+        times[k][0] = n
+        n +=2
     array_type = "Numexpr_opt"
 elif(optimization=="n"):
     for k in range(iteration):

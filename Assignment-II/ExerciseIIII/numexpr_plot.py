@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 datadir    = ''
 
-dataname_np = 'Numexpr_opt.txt'
-dataname_ex = 'Numpy_opt.txt'
+dataname_ex = 'Numexpr_opt.txt'
+dataname_np = 'Numpy_opt.txt'
 
 time_np     = np.loadtxt(dataname_np)
 time_ex     = np.loadtxt(dataname_ex)
@@ -17,5 +17,5 @@ plt.ylabel(r"$Run time$",fontsize=18)
 plt.xlim(xmin=0)
 plt.ylim(ymin=0)
 plot_type = "Compare_numpy_numexpr"
-#plt.savefig(plot_type+".png")
-plt.show()
+plt.savefig(plot_type+".png")
+#plt.show()
